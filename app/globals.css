@@ -13,7 +13,7 @@
 }
 @layer components {
   .tools {
-    @apply rounded-lg shadow p-4 h-24 text-base font-semibold text-black;
+    @apply rounded-lg shadow p-4 h-24 text-base font-semibold text-black flex justify-items-start items-center gap-1.5  hover:bg-[#EBF1F6];
   }
   .section-header {
     @apply text-2xl text-black  font-semibold p-4 space-y-10;

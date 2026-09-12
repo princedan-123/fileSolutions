@@ -1,11 +1,12 @@
 import { compress } from "@quicktoolsone/pdf-compress";
-export async function compressPdf(file: File) {
+export async function compressPdf(file: File, setProgress) {
   const fileBuffer = await file.arrayBuffer();
   try {
     const compressedFile = await compress(fileBuffer, {
       preset: "lossless",
       onProgress: (event) => {
-        console.log(event);
+        console.log(event.progress);
+        setProgress(event.progress);
       },
     });
     if (compressedFile) {

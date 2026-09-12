@@ -2,8 +2,11 @@ type DownloadInfoObject = {
   downloadUrl: string;
   fileName: string;
 };
+type Fileprop = {
+  downloadInfo: DownloadInfoObject;
+};
 
-export default function FileReady({ downloadInfo }: DownloadInfoObject) {
+export default function FileReady({ downloadInfo }: Fileprop) {
   return (
     <div>
       <h3 className="text-center text-black font-bold">File is ready</h3>

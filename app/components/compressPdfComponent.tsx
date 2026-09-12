@@ -1,31 +1,36 @@
 "use client";
 import UploadFile from "./uploadFile";
-import React from "react";
-import type { Dispatch, SetStateAction } from "react";
-import { ActionDetail } from "@/app/components/pdf-actions/";
+import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 import FileReady from "./fileReady";
-import { compressPdf } from "../utilities/pdf-functions";
+import { compressPdf } from "../utilities/compressPdf";
 type DownloadInfoObject = {
   downloadUrl: string;
   fileName: string;
 };
 
-export default function UploadCard({ description }: ActionDetail | undefined) {
+export default function CompressPdfComponent() {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [progress, setProgress] = useState<number>(0);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [downloadInfo, setDownloadInfo] = useState<DownloadInfoObject | null>(
     null,
   );
-
-  const cardText = description?.description;
+  const cardText = "Compress PDF File";
+  console.log(`this is ${progress}`);
+  useEffect(() => {
+    if (selectedFile) {
+      compressPdf(selectedFile, setProgress).then((result) =>
+        setDownloadInfo(result),
+      );
+    }
+    return;
+  }, [selectedFile]);
   return (
     <div
       onDrop={async (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-        const selectedFile = event.dataTransfer.files[0];
-        if (selectedFile) {
-          setDownloadInfo(await compressPdf(selectedFile));
-        }
+        setSelectedFile(event.dataTransfer.files[0]);
       }}
       onDragOver={(event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
@@ -42,10 +47,7 @@ export default function UploadCard({ description }: ActionDetail | undefined) {
           hidden
           ref={fileInputRef}
           onChange={async (event: React.ChangeEvent<HTMLInputElement>) => {
-            const selectedFile = event.target.files?.[0] ?? null;
-            if (selectedFile) {
-              setDownloadInfo(await compressPdf(selectedFile));
-            }
+            setSelectedFile(event.target.files?.[0] ?? null);
           }}
         />
         <button
@@ -59,6 +61,7 @@ export default function UploadCard({ description }: ActionDetail | undefined) {
         </button>
       </form>
       <div className="text-center text-gray-600">or drag file</div>
+      <div>{progress > 0 ? `compressing... ${progress}%` : ""}</div>
       {downloadInfo?.downloadUrl && <FileReady downloadInfo={downloadInfo} />}
     </div>
   );

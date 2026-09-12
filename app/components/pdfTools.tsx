@@ -17,12 +17,12 @@ export default function PdfTools() {
         <span>Edit PDF</span>
       </Link>
 
-      <Link href="/pdf-tools/compressPdf" className="tools">
+      <Link href="../compress-pdf" className="tools">
         <Image src={compressIcon} alt="compress file icon" />
         <span>Compress PDF</span>
       </Link>
 
-      <Link href="/pdf-tools/pdfToImage" className="tools">
+      <Link href="../pdf-to-image" className="tools">
         <Image src={fileToImage} alt="file to image icon" />
         <span>PDF to Image</span>
       </Link>

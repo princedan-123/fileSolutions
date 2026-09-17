@@ -3,7 +3,10 @@ import { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import rootLayerIcon from "@/app/icons/file_solutions_logo.png";
-import { Inter } from "next/font/google";
+import { Inter, Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const interFont = Inter({
   subsets: ["latin"],
@@ -11,7 +14,7 @@ const interFont = Inter({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className={`${interFont.className}`}>
         <header className="shadow-[0_4px_4px_rgba(0,0,0,0.1)] w-full py-6 px-3">
           <nav className="w-full">

@@ -2,27 +2,26 @@
 import UploadFile from "./uploadFile";
 import React, { useEffect } from "react";
 import { useRef, useState } from "react";
-import FileReady from "./fileReady";
-import { compressPdf } from "../utilities/compressPdf";
-type DownloadInfoObject = {
-  downloadUrl: string;
-  fileName: string;
-};
+import pdfToJpeg from "../utilities/pdf-to-jpg";
+import SetImages from "./setImages";
 
 export default function PdfToImage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [progress, setProgress] = useState<number>(0);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [downloadInfo, setDownloadInfo] = useState<DownloadInfoObject | null>(
+  const [processedFile, setProcessedFile] = useState<string[] | string | null>(
     null,
   );
-  const cardText = "Compress PDF File";
-  console.log(`this is ${progress}`);
+
+  const cardText = "PDF to JPEG Image";
   useEffect(() => {
     if (selectedFile) {
-      compressPdf(selectedFile, setProgress).then((result) =>
-        setDownloadInfo(result),
-      );
+      pdfToJpeg(selectedFile)
+        .then((result) => {
+          setProcessedFile(result);
+        })
+        .catch((error) => {
+          setProcessedFile(error);
+        });
     }
     return;
   }, [selectedFile]);
@@ -35,7 +34,7 @@ export default function PdfToImage() {
       onDragOver={(event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
       }}
-      className="flex flex-col justify-between items-center gap-4.5 shadow-[0px_4px_6px_1px_rgba(0,0,0,0.1)] p-6 w-full max-w-sm "
+      className="flex flex-col justify-between items-center gap-4.5 shadow-[0px_4px_6px_1px_rgba(0,0,0,0.1)] p-6 w-1/2 max-w-lg "
     >
       <p className="font-semibold text-xl p-2 text-center">{cardText}</p>
       <UploadFile />
@@ -61,8 +60,11 @@ export default function PdfToImage() {
         </button>
       </form>
       <div className="text-center text-gray-600">or drag file</div>
-      <div>{progress > 0 ? `compressing... ${progress}%` : ""}</div>
-      {downloadInfo?.downloadUrl && <FileReady downloadInfo={downloadInfo} />}
+      {Array.isArray(processedFile) && selectedFile != null ? (
+        <SetImages images={processedFile} file={selectedFile} />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

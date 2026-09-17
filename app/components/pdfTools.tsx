@@ -12,7 +12,7 @@ import pdfToFileIcon from "@/app/icons/doc-file.png";
 export default function PdfTools() {
   return (
     <section className="flex flex-col gap-6 p-6 md:grid md:grid-cols-4 lg:grid-cols-5">
-      <Link href="/pdf-tools/editPdf" className="tools">
+      <Link href="/pdf-tools/editPdf" className="tools hidden">
         <Image src={editIcon} alt="edit icon" />
         <span>Edit PDF</span>
       </Link>
@@ -27,27 +27,27 @@ export default function PdfTools() {
         <span>PDF to Image</span>
       </Link>
 
-      <Link href="/pdf-tools/splitPdf" className="tools">
+      <Link href="/pdf-tools/splitPdf" className="tools hidden">
         <Image src={splitFileIcon} alt="split file icon" />
         <span>Split PDF</span>
       </Link>
 
-      <Link href="/pdf-tools/mergePdf" className="tools">
+      <Link href="/pdf-tools/mergePdf" className="tools hidden">
         <Image src={mergeFileIcon} alt="merge file icon" />
         <span>Merge PDF</span>
       </Link>
 
-      <Link href="/pdf-tools/signPdf" className="tools">
+      <Link href="/pdf-tools/signPdf" className="tools hidden">
         <Image src={signFileIcon} alt="sign file icon" />
         <span>Sign PDF</span>
       </Link>
 
-      <Link href="/pdf-tools/pdfToTxt" className="tools">
+      <Link href="/pdf-tools/pdfToTxt" className="tools hidden">
         <Image src={fileToTextIcon} alt="pdf to txt" />
         <span>PDF to TXT</span>
       </Link>
 
-      <Link href="/pdf-tools/pdfToDoc" className="tools">
+      <Link href="/pdf-tools/pdfToDoc" className="tools hidden">
         <Image src={pdfToFileIcon} alt="PDF to file" />
         <span>PDF to DOC</span>
       </Link>

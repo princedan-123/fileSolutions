@@ -5,8 +5,9 @@ import Link from "next/link";
 import rootLayerIcon from "@/app/icons/file_solutions_logo.png";
 import { Inter, Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import QueryProvider from "./components/queryProvider";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const interFont = Inter({
   subsets: ["latin"],
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </Link>
           </nav>
         </header>
-        {children}
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );

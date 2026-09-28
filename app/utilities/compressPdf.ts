@@ -1,5 +1,10 @@
 import { compress } from "@quicktoolsone/pdf-compress";
-export async function compressPdf(file: File, setProgress) {
+import type { Dispatch, SetStateAction } from "react";
+
+export async function compressPdf(
+  file: File,
+  setProgress: Dispatch<SetStateAction<number>>,
+) {
   const fileBuffer = await file.arrayBuffer();
   try {
     const compressedFile = await compress(fileBuffer, {

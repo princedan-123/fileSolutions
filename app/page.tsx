@@ -1,8 +1,6 @@
 import heroImage from "@/app/images/hero_image.jpg";
 import Image from "next/image";
-import UploadFile from "./components/uploadFile";
 import PdfTools from "./components/pdfTools";
-import UploadCard from "./components/UploadCard";
 
 export default function RootPage() {
   return (

@@ -24,6 +24,9 @@
   .button-secondary {
     @apply inline-flex items-center justify-center rounded-lg border border-[#007bff] bg-white px-5 py-2.5 text-sm font-medium text-[#007bff] transition-colors duration-200 hover:bg-[#007bff] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#007bff]/30;
   }
+  .page-layout {
+    @apply bg-background flex flex-col items-center p-3 md:flex-row md:justify-evenly gap-7;
+  }
 }
 
 @theme inline {

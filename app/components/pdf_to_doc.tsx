@@ -86,7 +86,7 @@ export default function ConvertPdfToDoc() {
       onDragOver={(event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
       }}
-      className="flex flex-col justify-between items-center gap-4.5 shadow-[0px_4px_6px_1px_rgba(0,0,0,0.1)] p-6 w-full max-w-lg "
+      className="action-card"
     >
       <p className="font-semibold text-xl p-2 text-center">{cardText}</p>
       {isPending && <p className="animate-pulse">Preparing File Upload...</p>}

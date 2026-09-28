@@ -12,7 +12,7 @@ export default function RootPage() {
             width={853}
             height={768}
             alt="Hero section image"
-            className="max-w-md h-auto object-contain"
+            className="w-full h-auto object-contain"
           />
         </div>
         <div className="font-bold text-black text-2xl md:text-xl p-2 text-center md:order-2">

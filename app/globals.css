@@ -27,6 +27,9 @@
   .page-layout {
     @apply bg-background flex flex-col items-center p-3 md:flex-row md:justify-evenly gap-7;
   }
+  .action-card {
+    @apply flex flex-col justify-between items-center gap-4.5 shadow-[0px_4px_6px_1px_rgba(0,0,0,0.1)] p-6 w-full max-w-lg;
+  }
 }
 
 @theme inline {

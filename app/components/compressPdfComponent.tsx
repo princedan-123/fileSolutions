@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 import FileReady from "./fileReady";
 import { compressPdf } from "../utilities/compressPdf";
+import validateFile from "../utilities/file-validation";
 type DownloadInfoObject = {
   downloadUrl: string;
   fileName: string;
@@ -16,6 +17,7 @@ export default function CompressPdfComponent() {
   const [downloadInfo, setDownloadInfo] = useState<DownloadInfoObject | null>(
     null,
   );
+
   const cardText = "Compress PDF File";
   console.log(`this is ${progress}`);
   useEffect(() => {
@@ -30,7 +32,11 @@ export default function CompressPdfComponent() {
     <div
       onDrop={async (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-        setSelectedFile(event.dataTransfer.files[0]);
+        const file = event.dataTransfer.files[0];
+        if (!file) return;
+        const fileIsValid = validateFile(file);
+        if (!fileIsValid) alert("Kindly select a PDF file");
+        setSelectedFile(file);
       }}
       onDragOver={(event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
@@ -47,7 +53,11 @@ export default function CompressPdfComponent() {
           hidden
           ref={fileInputRef}
           onChange={async (event: React.ChangeEvent<HTMLInputElement>) => {
-            setSelectedFile(event.target.files?.[0] ?? null);
+            const file = event.target.files?.[0];
+            if (!file) return;
+            const fileIsValid = validateFile(file);
+            if (!fileIsValid) alert("Kindly select a PDF file");
+            setSelectedFile(file ?? null);
           }}
         />
         <button

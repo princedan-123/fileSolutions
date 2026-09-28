@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import fetchFormUrl, { fetchJobStatus } from "../utilities/fetchJob";
 import Image from "next/image";
 import uploadFile from "../utilities/fileUpload";
+import validateFile from "../utilities/file-validation";
 type FileData = {
   uploadUrl: string;
   file: File;
@@ -81,6 +82,10 @@ export default function ConvertPdfToDoc() {
     <div
       onDrop={async (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
+        const file = event.dataTransfer.files[0];
+        if (!file) return;
+        const fileIsValid = validateFile(file);
+        if (!fileIsValid) alert("Kindly select a PDF file");
         setSelectedFile(event.dataTransfer.files[0]);
       }}
       onDragOver={(event: React.DragEvent<HTMLDivElement>) => {
@@ -115,6 +120,10 @@ export default function ConvertPdfToDoc() {
           hidden
           ref={fileInputRef}
           onChange={async (event: React.ChangeEvent<HTMLInputElement>) => {
+            const file = event.target.files?.[0];
+            if (!file) return;
+            const fileIsValid = validateFile(file);
+            if (!fileIsValid) alert("Kindly select a PDF file");
             setSelectedFile(event.target.files?.[0] ?? null);
           }}
         />

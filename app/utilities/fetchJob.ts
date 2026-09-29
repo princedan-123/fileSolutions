@@ -4,7 +4,7 @@ export default async function fetchFormUrl() {
     "http://localhost:3000/routes/conversion-routes",
   );
   if (!response.ok) {
-    throw new Error(`unable to fetch form url --- status ${response.status}`);
+    throw new Error(`${response.status}`);
   }
   return await response.json();
 }
@@ -15,7 +15,7 @@ export async function fetchJobStatus(job_id: string | null) {
   }
   const response = await fetch(`http://localhost:3000/routes/${job_id}`);
   if (!response.ok) {
-    throw new Error(`unable to fetch job status -- status:${response.status}`);
+    throw new Error(`${response.status}`);
   }
   return await response.json();
 }

@@ -47,7 +47,7 @@ export default function PdfTools() {
         <span>PDF to TXT</span>
       </Link>
 
-      <Link href="../pdf-to-doc" className="tools" hidden>
+      <Link href="../pdf-to-doc" className="tools">
         <Image src={pdfToFileIcon} alt="PDF to file" />
         <span>PDF to DOC</span>
       </Link>
